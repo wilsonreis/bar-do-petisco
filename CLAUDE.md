@@ -80,6 +80,34 @@ truque força a renderização real na largura/altura certa mesmo sem
 conseguir redimensionar a janela do navegador — útil lembrar se precisar
 testar de novo.
 
+**Limitação importante do truque de iframe, descoberta em 2026-08-16**:
+funciona bem pra conferir layout/tamanho (largura real, quebra de linha,
+etc.), mas **rolagem simulada por scroll do mouse dentro do iframe não é
+confiável pra testar `position: sticky`** — um teste assim indicou
+(erroneamente) que `overflow-x: hidden` no `body` quebrava o header
+sticky; a "correção" foi tentada de várias formas (mover pra `html`,
+trocar por `overflow-x: clip`, até remover completamente) e o sintoma
+persistiu idêntico mesmo sem nenhum `overflow-x` em lugar nenhum — sinal
+de que o problema era do método de teste (iframe aninhado + scroll
+sintético), não do CSS. Confirmado depois testando com scroll real direto
+na página de nível superior (sem iframe): `body { overflow-x: hidden; }`
+**não quebra** o sticky de verdade. Lição: usar o iframe só pra layout;
+pra qualquer coisa que dependa de comportamento de scroll, testar direto
+na página real.
+
+**Segundo achado real de bug, corrigido**: usuário reportou que ao clicar
+no botão "Peça agora" (canto superior direito) "o topo some e não dá pra
+voltar a não ser rolando a página". Reproduzido em teste: o clique trava
+a aba num diálogo nativo do Chrome (JS da página continua respondendo,
+só a captura de tela trava) — condizente com o comportamento conhecido de
+links `wa.me` com `target="_blank"` no Android Chrome, que tentam abrir
+o app do WhatsApp numa aba nova e podem deixar uma aba em branco/travada
+pra trás. **Corrigido**: removido `target="_blank"`/`rel="noopener"` dos
+3 botões de WhatsApp (nav, hero, rodapé) — agora navegam na mesma aba,
+prática padrão recomendada pra esse tipo de link em mobile. Links de
+Instagram/Facebook mantiveram `target="_blank"` (sites normais, sem esse
+problema conhecido).
+
 ## Estrutura de pastas
 
 ```
@@ -101,4 +129,6 @@ welton/
 2. Fotos reais do bar (trocar as de banco de imagens).
 3. Número real de WhatsApp e links reais de Instagram/Facebook.
 4. Endereço e horário reais no rodapé.
-5. Primeiro commit git + publicar no GitHub (Pages).
+5. ~~Primeiro commit git + publicar no GitHub (Pages)~~ — feito, ver
+   `github.com/wilsonreis/bar-do-petisco` e
+   `https://wilsonreis.github.io/bar-do-petisco/`.
