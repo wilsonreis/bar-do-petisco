@@ -108,6 +108,20 @@ prática padrão recomendada pra esse tipo de link em mobile. Links de
 Instagram/Facebook mantiveram `target="_blank"` (sites normais, sem esse
 problema conhecido).
 
+**Conclusão real do usuário sobre o bug acima**: testando de novo, achou
+que era cache do navegador do celular (funcionava normal no navegador
+embutido da IDE) — decidiu não investigar mais o clique do WhatsApp em
+si. Mas ao reproduzir o cenário exato que ele descreveu (menu hambúrguer
+→ clicar em "Eventos") achei um **terceiro bug real, independente**: o
+cabeçalho fixo (sticky, 68px) cobria o título da seção de destino ao
+pular por âncora, porque nada descontava a altura do cabeçalho na hora do
+salto. Isso batia com "vai pro eventos mas perde o topo". **Corrigido**
+com `scroll-padding-top: 68px` no `html` — o navegador agora sempre
+deixa esse respiro no topo ao pular pra qualquer seção (âncora do menu ou
+scroll suave dos botões). Confirmado por medição de geometria (não só
+print, que estava com timing inconsistente nesta sessão): topo da seção
+Eventos em 268px, cabeçalho termina em 68px, sem sobreposição.
+
 ## Estrutura de pastas
 
 ```

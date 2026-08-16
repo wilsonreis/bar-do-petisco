@@ -28,7 +28,10 @@
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+/* scroll-padding-top = altura do header (.header__inner) — sem isso, ao
+   pular pra uma seção (âncora ou menu mobile), o header fixo cobre o
+   topo da seção de destino */
+html { scroll-behavior: smooth; scroll-padding-top: 68px; }
 
 body {
   margin: 0;
