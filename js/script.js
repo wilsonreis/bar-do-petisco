@@ -12,8 +12,9 @@
 // ------------------------------------------------------------
 const CONFIG = {
   // Número de WhatsApp em formato internacional, só dígitos (55 + DDD + número).
-  // PLACEHOLDER — trocar pelo número real do Bar do Petisco.
-  whatsappNumero: "5527999999999",
+  // TEMPORÁRIO pra teste (número pessoal do usuário) — trocar pelo número
+  // real do Bar do Petisco assim que disponível.
+  whatsappNumero: "5521982614390",
   whatsappMensagem: "Olá! Vim pelo site do Bar do Petisco e quero fazer um pedido 🍻",
 
   // PLACEHOLDER — trocar pelos links reais das redes sociais.
