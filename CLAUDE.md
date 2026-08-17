@@ -150,16 +150,15 @@ toggle). Não reproduzível neste ambiente de teste (é um bug de
 compositor real de Chrome Android) — corrigido por raciocínio bem
 fundamentado, não por reprodução direta.
 
-**Testado pelo usuário: o bug ainda acontece** (mesmo depois da correção
-acima), mas rolar a tela pra cima traz o cabeçalho de volta normalmente —
-não trava de vez, só precisa desse gesto. **Decisão do usuário
-(2026-08-17): aceitar como está por enquanto.** É protótipo pra avaliação
-da filha/Welton, o site já está "muito bonito, operacional", e esse
-detalhe fica pra tratar **depois da contratação confirmada** — não
-retomar essa investigação sem pedido explícito do usuário. Duas
-correções (fechamento instantâneo do menu, remoção do backdrop-filter)
-já foram aplicadas e ajudam, mas não eliminam o comportamento por
-completo nesse dispositivo/versão de Chrome Android específicos.
+**Resolvido de vez (2026-08-17)**: usuário testou de novo depois de uma
+pausa (inclusive fora de aba anônima) e confirmou **100% funcionando** —
+era mesmo cache do navegador do celular, a suspeita original dele (ver
+início desta seção). As correções de código (menu fechando instantâneo,
+`scroll-padding-top`, número de WhatsApp real, remoção do
+`backdrop-filter`) continuam válidas e corretas, mas o sintoma que
+persistia depois delas era só cache antigo do dispositivo ainda não
+expirado/limpo — não um bug de código restante. Não há mais pendência
+conhecida de bug neste site.
 
 ## Estrutura de pastas
 
