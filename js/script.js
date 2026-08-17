@@ -248,13 +248,25 @@ function configurarMenuMobile() {
   const menu = document.getElementById("navMenu");
 
   botao.addEventListener("click", () => {
+    // remove o "fechar instantâneo" antes de abrir de novo, senão a
+    // próxima abertura também ficaria sem animação (ver comentário abaixo)
+    menu.classList.remove("nav--fechar-instantaneo");
     const aberto = menu.classList.toggle("nav--aberto");
     botao.setAttribute("aria-expanded", aberto ? "true" : "false");
   });
 
-  // Fecha o menu ao clicar em qualquer link (comportamento esperado no mobile)
+  // Fecha o menu ao clicar em qualquer link (comportamento esperado no mobile).
+  // Fecha SEM animação (nav--fechar-instantaneo) porque a página também vai
+  // rolar suavemente até a seção ao mesmo tempo — duas animações concorrentes
+  // (fechar menu + scroll suave) confundem o repaint do Chrome Android e
+  // deixam o cabeçalho fixo sumido até vários toques de scroll forçarem o
+  // recálculo. Fechando instantâneo, sobra só uma animação por vez. A classe
+  // fica ali até a próxima vez que o hambúrguer for clicado (não precisa
+  // remover logo depois — o menu está fechado/invisível o tempo todo nesse
+  // meio-tempo, então não faz diferença visual).
   menu.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", () => {
+      menu.classList.add("nav--fechar-instantaneo");
       menu.classList.remove("nav--aberto");
       botao.setAttribute("aria-expanded", "false");
     });

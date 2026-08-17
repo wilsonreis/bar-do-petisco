@@ -101,7 +101,6 @@ a { color: inherit; text-decoration: none; }
   top: 0;
   z-index: 100;
   background: rgba(36, 22, 17, .96);
-  backdrop-filter: blur(6px);
 }
 
 .header__inner {
@@ -164,6 +163,10 @@ a { color: inherit; text-decoration: none; }
   visibility: visible;
   transition: transform .3s ease, visibility 0s linear 0s;
 }
+/* fecha sem transição ao navegar — ver comentário em js/script.js
+   (configurarMenuMobile) sobre por que isso evita o bug do cabeçalho
+   sumido no Chrome Android */
+.nav.nav--fechar-instantaneo { transition: none !important; }
 
 .nav__link {
   font-family: var(--fonte-titulo);

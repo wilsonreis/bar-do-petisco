@@ -129,10 +129,27 @@ de "número inválido", que travava a experiência. Trocado temporariamente
 pelo número pessoal real do usuário (`5521982614390`, DDD 21) só pra
 validar — **ainda precisa ser trocado pelo número real do Bar do Petisco**
 quando disponível (ver `README.md`, checklist). **Confirmado pelo usuário
-testando no próprio celular Android, em aba anônima: funcionando.** Os
-três bugs reais desta sessão (menu mobile colapsado, cabeçalho cobrindo
-seção ao navegar, número de WhatsApp inválido) estão todos corrigidos e
-validados de ponta a ponta.
+testando no próprio celular Android, em aba anônima: funcionando.**
+
+**Quarto bug real, o mais sutil**: mesmo com o WhatsApp funcionando, o
+usuário reportou separadamente que **clicar em "Eventos" no menu
+hambúrguer** ainda fazia "o topo sumir", só reaparecendo "depois de
+alguns toques" de scroll — sintoma diferente de simplesmente rolar a
+página (que já tínhamos confirmado funcionar normal). Causa provável:
+fechar o menu mobile (animado, `.3s`) e rolar suavemente até a seção
+(`scroll-behavior: smooth`) aconteciam **ao mesmo tempo**, e duas
+animações concorrentes mexendo em `position:fixed`/`position:sticky`
+confundem o compositor do Chrome Android até um scroll adicional forçar
+o recálculo — categoria de bug conhecida nesse combo específico.
+**Corrigido**: o menu agora fecha **instantâneo** (sem transição, classe
+`nav--fechar-instantaneo`) especificamente quando o fechamento é por
+clique num link de navegação — só sobra uma animação rodando de cada vez
+(a rolagem suave). O toggle pelo hambúrguer continua animado normalmente
+(a classe é removida no início do handler do botão, antes do próximo
+toggle). Não reproduzível neste ambiente de teste (é um bug de
+compositor real de Chrome Android) — corrigido por raciocínio bem
+fundamentado, não por reprodução direta; **pendente confirmação do
+usuário no celular**.
 
 ## Estrutura de pastas
 
