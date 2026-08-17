@@ -122,6 +122,18 @@ scroll suave dos botões). Confirmado por medição de geometria (não só
 print, que estava com timing inconsistente nesta sessão): topo da seção
 Eventos em 268px, cabeçalho termina em 68px, sem sobreposição.
 
+**Causa real do bug do WhatsApp, finalmente confirmada**: não era cache
+nem `target="_blank"` — era o **número placeholder fictício**
+(`5527999999999`, não existe de verdade) fazendo o WhatsApp mostrar erro
+de "número inválido", que travava a experiência. Trocado temporariamente
+pelo número pessoal real do usuário (`5521982614390`, DDD 21) só pra
+validar — **ainda precisa ser trocado pelo número real do Bar do Petisco**
+quando disponível (ver `README.md`, checklist). **Confirmado pelo usuário
+testando no próprio celular Android, em aba anônima: funcionando.** Os
+três bugs reais desta sessão (menu mobile colapsado, cabeçalho cobrindo
+seção ao navegar, número de WhatsApp inválido) estão todos corrigidos e
+validados de ponta a ponta.
+
 ## Estrutura de pastas
 
 ```
