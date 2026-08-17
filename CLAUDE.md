@@ -148,8 +148,18 @@ clique num link de navegação — só sobra uma animação rodando de cada vez
 (a classe é removida no início do handler do botão, antes do próximo
 toggle). Não reproduzível neste ambiente de teste (é um bug de
 compositor real de Chrome Android) — corrigido por raciocínio bem
-fundamentado, não por reprodução direta; **pendente confirmação do
-usuário no celular**.
+fundamentado, não por reprodução direta.
+
+**Testado pelo usuário: o bug ainda acontece** (mesmo depois da correção
+acima), mas rolar a tela pra cima traz o cabeçalho de volta normalmente —
+não trava de vez, só precisa desse gesto. **Decisão do usuário
+(2026-08-17): aceitar como está por enquanto.** É protótipo pra avaliação
+da filha/Welton, o site já está "muito bonito, operacional", e esse
+detalhe fica pra tratar **depois da contratação confirmada** — não
+retomar essa investigação sem pedido explícito do usuário. Duas
+correções (fechamento instantâneo do menu, remoção do backdrop-filter)
+já foram aplicadas e ajudam, mas não eliminam o comportamento por
+completo nesse dispositivo/versão de Chrome Android específicos.
 
 ## Estrutura de pastas
 
